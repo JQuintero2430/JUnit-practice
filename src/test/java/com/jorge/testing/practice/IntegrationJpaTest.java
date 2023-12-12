@@ -55,7 +55,7 @@ public class IntegrationJpaTest {
     @Test
     void testSave() {
         // Given
-        Cuenta cuentaPepe = new Cuenta(null, "Pepe", new java.math.BigDecimal("3000"));
+        Cuenta cuentaPepe = new Cuenta(null, "Pepe", new BigDecimal("3000"));
         Cuenta cuenta = cuentaRepository.save(cuentaPepe);
         // When
         cuentaRepository.findByPersona("Pepe");
