@@ -21,7 +21,6 @@ public class IntegrationJpaTest {
     @Test
     void testFindById() {
         Optional<Cuenta> cuenta = cuentaRepository.findById(1L);
-
         assertTrue(cuenta.isPresent());
         assertEquals("Jorge", cuenta.orElseThrow().getPersona());
         assertEquals("1000.00", cuenta.orElseThrow().getSaldo().toPlainString());
@@ -30,7 +29,6 @@ public class IntegrationJpaTest {
     @Test
     void testFindByPersona() {
         Optional<Cuenta> cuenta = cuentaRepository.findByPersona("Maria");
-
         assertTrue(cuenta.isPresent());
         assertEquals("Maria", cuenta.orElseThrow().getPersona());
         assertEquals("2000.00", cuenta.orElseThrow().getSaldo().toPlainString());
@@ -39,7 +37,6 @@ public class IntegrationJpaTest {
     @Test
     void testThrowExceptio() {
         Optional<Cuenta> cuenta = cuentaRepository.findByPersona("Juan");
-
         assertFalse(cuenta.isPresent());
         assertThrows(NoSuchElementException.class, cuenta::orElseThrow);
     }
@@ -47,7 +44,6 @@ public class IntegrationJpaTest {
     @Test
     void testFindAll() {
         List<Cuenta> cuentas = cuentaRepository.findAll();
-
         assertFalse(cuentas.isEmpty());
         assertEquals(5, cuentas.size());
     }
