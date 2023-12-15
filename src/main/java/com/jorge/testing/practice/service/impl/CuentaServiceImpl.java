@@ -7,6 +7,7 @@ import com.jorge.testing.practice.repository.CuentaRepository;
 import com.jorge.testing.practice.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -24,11 +25,13 @@ public class CuentaServiceImpl implements CuentaService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Cuenta> findById(Long id) {
         return cuentaRepository.findById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int revisarTotalTransferencias(Long bancoId) {
         Banco banco = bancoRepository.findById(bancoId)
                 .orElseThrow(() -> new IllegalArgumentException("Banco no existe"));
@@ -36,12 +39,14 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BigDecimal revisarSaldo(Long cuentaId) {
         Optional<Cuenta> cuenta = cuentaRepository.findById(cuentaId);
         return cuenta.map(Cuenta::getSaldo).orElseThrow();
     }
 
     @Override
+    @Transactional
     public void transferir(Long numeroCuentaOrigen, Long numeroCuentaDestino, BigDecimal monto, Long bancoId) {
         Cuenta cuentaOrigen = cuentaRepository.findById(numeroCuentaOrigen)
                 .orElseThrow(() -> new IllegalArgumentException("Cuenta origen no existe"));
@@ -61,6 +66,7 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Cuenta> findByPersona(String persona) {
         return cuentaRepository.findByPersona(persona);
     }
