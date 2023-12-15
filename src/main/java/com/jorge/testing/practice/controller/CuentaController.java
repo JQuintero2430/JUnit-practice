@@ -27,7 +27,7 @@ public class CuentaController {
     @GetMapping("{id}")
     @ResponseStatus(OK)
     public Optional<Cuenta> detalle(@PathVariable Long id) {
-        return cuentaService.findById(1L);
+        return cuentaService.findById(id);
     }
 
     @PostMapping("/transferir")

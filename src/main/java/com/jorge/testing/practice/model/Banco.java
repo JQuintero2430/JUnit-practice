@@ -1,17 +1,16 @@
 package com.jorge.testing.practice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Banco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nombre")
     private String nombre;
-    private int totalTransferencias;
+    @Column(name = "total_transferencias")
+    private Integer totalTransferencias;
 
     public Banco() {
     }
